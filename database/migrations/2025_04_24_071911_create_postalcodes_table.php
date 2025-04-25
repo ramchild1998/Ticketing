@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id(); // int UN AI PK
             $table->unsignedInteger('poscode'); // int UN
             $table->unsignedBigInteger('subdistrict_id'); // int UN
+            $table->timestamps(); // timestamp created_at, updated_at
 
             $table->foreign('subdistrict_id')->references('id')->on('subdistrict')->onDelete('cascade');
         });

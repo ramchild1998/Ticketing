@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id(); // int UN AI PK
             $table->string('province_name', 255); // varchar(255)
             $table->boolean('status'); // tinyint(1)
+            $table->timestamps(); // timestamp
         });
     }
     /**

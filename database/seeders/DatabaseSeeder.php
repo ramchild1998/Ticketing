@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             DistrictsTableSeeder::class,
             SubdistrictsTableSeeder::class,
             PostalcodesTableSeeder::class,
-            // UsersTableSeeder::class,
+            UsersTableSeeder::class,
             VendorsTableSeeder::class,
             OfficesTableSeeder::class,
         ]);

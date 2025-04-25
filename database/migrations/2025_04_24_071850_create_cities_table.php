@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id(); // int UN AI PK
             $table->string('city_name', 255); // varchar(255)
             $table->unsignedBigInteger('province_id'); // int UN
+            $table->timestamps(); // timestamp created_at, updated_at
 
             $table->foreign('province_id')->references('id')->on('province')->onDelete('cascade');
         });
