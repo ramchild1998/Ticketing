@@ -31,8 +31,6 @@ class UserResource extends Resource
         return 'Users';
     }
 
-    protected static ?int $navigationSort = 4;
-
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
@@ -54,7 +52,7 @@ class UserResource extends Resource
                     ->preload()
                     ->required(),
                 TextInput::make('name')
-                    ->label('Nama')
+                    ->label('Name')
                     ->required()
                     ->maxLength(255),
                 TextInput::make('email')
@@ -73,7 +71,7 @@ class UserResource extends Resource
                     ->revealable()
                     ->same('password_confirmation'),
                 TextInput::make('password_confirmation')
-                    ->label('Konfirmasi Password')
+                    ->label('Confirm Password')
                     ->password()
                     ->required()
                     ->maxLength(255)
@@ -81,7 +79,7 @@ class UserResource extends Resource
                     ->visible(fn ($record) => $record === null)
                     ->revealable(),
                 TextInput::make('phone')
-                    ->label('No. Telepon')
+                    ->label('Phone Number')
                     ->required()
                     ->maxLength(255),
                 CheckboxList::make('roles')
@@ -97,20 +95,20 @@ class UserResource extends Resource
                 ->label('NIP')
                 ->searchable()
                 ->sortable(),
-            TextColumn::make('office.office_name')
-                ->label('Office')
-                ->searchable()
-                ->sortable(),
             TextColumn::make('name')
-                ->label('Nama')
+                ->label('Name')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('email')
                 ->label('Email')
                 ->searchable()
                 ->sortable(),
+            TextColumn::make('office.office_name')
+                    ->label('Office')
+                    ->searchable()
+                    ->sortable(),
             TextColumn::make('phone')
-                ->label('No. Telepon')
+                ->label('Phone Number')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('roles.name')
@@ -144,7 +142,7 @@ class UserResource extends Resource
         ])
         ->actions([
             Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
+            // Tables\Actions\DeleteAction::make(),
         ])
         ->bulkActions([
             Tables\Actions\BulkActionGroup::make([
