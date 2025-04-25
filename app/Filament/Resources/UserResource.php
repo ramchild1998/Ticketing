@@ -83,7 +83,7 @@ class UserResource extends Resource
                 ->searchable()
                 ->sortable(),
             TextColumn::make('name')
-                ->label('Name')
+                ->label('Nama')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('email')
@@ -91,7 +91,7 @@ class UserResource extends Resource
                 ->searchable()
                 ->sortable(),
             TextColumn::make('phone')
-                ->label('Phone')
+                ->label('No. Telepon')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('created_at')
