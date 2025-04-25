@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -22,6 +23,20 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationGroup = 'Filament Shield';
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Users';
+    }
+
+    protected static ?int $navigationSort = 4;
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -54,19 +69,23 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->dehydrated(fn ($state) => filled($state))
-                    ->visible(fn ($record) => $record === null),
+                    ->visible(fn ($record) => $record === null)
+                    ->revealable()
+                    ->same('password_confirmation'),
                 TextInput::make('password_confirmation')
                     ->label('Konfirmasi Password')
                     ->password()
                     ->required()
                     ->maxLength(255)
                     ->dehydrated(fn ($state) => filled($state))
-                    ->visible(fn ($record) => $record === null),
+                    ->visible(fn ($record) => $record === null)
+                    ->revealable(),
                 TextInput::make('phone')
                     ->label('No. Telepon')
                     ->required()
                     ->maxLength(255),
-
+                CheckboxList::make('roles')
+                    ->relationship('roles', 'name')
             ]);
     }
 
@@ -93,6 +112,9 @@ class UserResource extends Resource
             TextColumn::make('phone')
                 ->label('No. Telepon')
                 ->searchable()
+                ->sortable(),
+            TextColumn::make('roles.name')
+                ->label('Roles')
                 ->sortable(),
             TextColumn::make('created_at')
                 ->label('Created At')
