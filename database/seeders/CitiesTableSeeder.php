@@ -10,21 +10,18 @@ class CitiesTableSeeder extends Seeder
 {
     public function run(): void
     {
-        // Path ke file CSV
-        $csvPath = storage_path('app/csv/city.csv');
+        // Path ke file JSON
+        $jsonPath = storage_path('app/json/city.json');
 
-        // Baca file CSV
-        if (!file_exists($csvPath)) {
-            throw new \Exception('File city.csv tidak ditemukan di storage/app/csv');
+        // Baca file JSON
+        if (!file_exists($jsonPath)) {
+            throw new \Exception('File city.json tidak ditemukan di storage/app/json');
         }
 
-        $file = fopen($csvPath, 'r');
-        $header = fgetcsv($file); // Baca header CSV
+        // Baca dan decode file JSON
+        $jsonData = json_decode(file_get_contents($jsonPath), true);
 
-        while (($row = fgetcsv($file)) !== false) {
-            // Map data CSV ke kolom model
-            $data = array_combine($header, $row);
-
+        foreach ($jsonData as $data) {
             City::create([
                 'id' => $data['id'],
                 'city_name' => $data['city_name'],
@@ -33,7 +30,5 @@ class CitiesTableSeeder extends Seeder
                 'updated_at' => now(),
             ]);
         }
-
-        fclose($file);
     }
 }
