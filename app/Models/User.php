@@ -3,12 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasAvatar
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles;
@@ -25,6 +27,7 @@ class User extends Authenticatable
         'password',
         'phone',
         'office_id',
+        'avatar_url',
     ];
 
     /**
@@ -49,6 +52,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function getFilamentAvatarUrl(): ?string
+{
+    $avatarPath = $this->avatar_url ?? $this->avatar ?? null;
+
+    if ($avatarPath && Storage::disk('public')->exists($avatarPath)) {
+        return asset('storage/' . $avatarPath);
+    }
+
+    return 'https://ui-avatars.com/api/?name=' . urlencode($this->name);
+}
 
     protected static $pendingOfficeIds = [];
 
