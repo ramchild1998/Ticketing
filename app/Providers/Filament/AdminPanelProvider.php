@@ -28,14 +28,18 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id('admin')
-            ->path('admin')
+            ->id('ticketing-system')
+            ->path('ticketing-system')
+            ->brandName(name: 'ATS Ticketing System')
             ->login()
             ->registration()
             ->passwordReset()
             ->emailVerification()
             ->profile()
             ->sidebarCollapsibleOnDesktop()
+            ->unsavedChangesAlerts()
+            ->databaseTransactions()
+            ->databaseNotifications()
             ->colors([
                 'primary' => Color::Indigo,
             ])
