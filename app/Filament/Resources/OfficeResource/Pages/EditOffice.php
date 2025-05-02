@@ -5,6 +5,7 @@ namespace App\Filament\Resources\OfficeResource\Pages;
 use App\Filament\Resources\OfficeResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Notification;
 
 class EditOffice extends EditRecord
 {
@@ -13,7 +14,20 @@ class EditOffice extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            // Actions\DeleteAction::make(),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
+
+    protected function getSavedNotification(): ?\Filament\Notifications\Notification
+    {
+        return Notification::make()
+            ->success()
+            ->title('Office updated')
+            ->body('The office has been updated successfully.');
     }
 }
