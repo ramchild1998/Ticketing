@@ -103,17 +103,19 @@ class UserResource extends Resource
             TextColumn::make('email')
                 ->label('Email')
                 ->searchable()
+                ->copyable()
                 ->sortable(),
             TextColumn::make('office.office_name')
-                    ->label('Office')
-                    ->searchable()
-                    ->sortable(),
+                ->label('Office')
+                ->searchable()
+                ->sortable(),
             TextColumn::make('phone')
                 ->label('Phone Number')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('roles.name')
                 ->label('Roles')
+                ->searchable()
                 ->sortable(),
             TextColumn::make('created_at')
                 ->label('Created At')
