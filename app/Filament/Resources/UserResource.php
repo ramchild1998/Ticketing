@@ -18,6 +18,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Swis\Filament\Activitylog\Tables\Actions\ActivitylogAction;
 
 class UserResource extends Resource
 {
@@ -146,6 +147,7 @@ class UserResource extends Resource
         ->actions([
             Tables\Actions\EditAction::make(),
             // Tables\Actions\DeleteAction::make(),
+            ActivitylogAction::make(),
         ], position: ActionsPosition::BeforeColumns)
         ->bulkActions([
             Tables\Actions\BulkActionGroup::make([
