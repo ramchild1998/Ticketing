@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             VendorsTableSeeder::class,
             OfficesTableSeeder::class,
             AreaTableSeeder::class,
+            ShieldSeeder::class,
         ]);
 
         // Aktifkan kembali foreign key constraints

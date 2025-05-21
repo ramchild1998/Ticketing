@@ -30,8 +30,8 @@ class RoleResource extends Resource implements HasShieldPermissions
             'view_any',
             'create',
             'update',
-            // 'delete',
-            // 'delete_any',
+            'delete',
+            'delete_any',
         ];
     }
 
@@ -117,7 +117,7 @@ class RoleResource extends Resource implements HasShieldPermissions
                 // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                // Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 

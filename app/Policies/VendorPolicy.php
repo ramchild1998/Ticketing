@@ -47,7 +47,7 @@ class VendorPolicy
      */
     public function delete(User $user, Vendor $vendor): bool
     {
-        return $user->can('{{ Delete }}');
+        return $user->can('delete_vendor');
     }
 
     /**
@@ -55,7 +55,7 @@ class VendorPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('{{ DeleteAny }}');
+        return $user->can('delete_any_vendor');
     }
 
     /**
@@ -63,7 +63,7 @@ class VendorPolicy
      */
     public function forceDelete(User $user, Vendor $vendor): bool
     {
-        return $user->can('{{ ForceDelete }}');
+        return $user->can('force_delete_vendor');
     }
 
     /**
@@ -71,7 +71,7 @@ class VendorPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('{{ ForceDeleteAny }}');
+        return $user->can('force_delete_any_vendor');
     }
 
     /**
