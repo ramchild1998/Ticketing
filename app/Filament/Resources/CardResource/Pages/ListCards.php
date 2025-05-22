@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Filament\Resources\OfficeResource\Pages;
+namespace App\Filament\Resources\CardResource\Pages;
 
-use App\Filament\Resources\OfficeResource;
+use App\Filament\Resources\CardResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListOffices extends ListRecords
+class ListCards extends ListRecords
 {
-    protected static string $resource = OfficeResource::class;
+    protected static string $resource = CardResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make()
-                ->label('Register New Office')
+                ->label('Register New Card')
                 ->icon('heroicon-o-plus')
                 ->color('primary')
                 ->size('lg')

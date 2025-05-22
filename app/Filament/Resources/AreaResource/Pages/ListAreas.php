@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Filament\Resources\OfficeResource\Pages;
+namespace App\Filament\Resources\AreaResource\Pages;
 
-use App\Filament\Resources\OfficeResource;
+use App\Filament\Resources\AreaResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListOffices extends ListRecords
+class ListAreas extends ListRecords
 {
-    protected static string $resource = OfficeResource::class;
+    protected static string $resource = AreaResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make()
-                ->label('Register New Office')
+                ->label('Register New Area')
                 ->icon('heroicon-o-plus')
                 ->color('primary')
                 ->size('lg')

@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\OperatorResource\Pages;
+use App\Filament\Resources\LocationResource\Pages;
 use App\Models\City;
 use App\Models\District;
-use App\Models\Operator;
+use App\Models\Location;
 use App\Models\PostalCode;
 use App\Models\Province;
 use App\Models\Subdistrict;
@@ -23,19 +23,19 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Cache;
 
-class OperatorResource extends Resource
+class LocationResource extends Resource
 {
-    protected static ?string $model = Operator::class;
+    protected static ?string $model = Location::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'heroicon-o-map-pin';
 
-    protected static ?string $navigationLabel = 'Operators';
+    protected static ?string $navigationLabel = 'Locations';
 
-    protected static ?string $pluralLabel = 'Operators';
+    protected static ?string $pluralLabel = 'Locations';
 
     protected static ?string $navigationGroup = 'Master Data';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
 
     public static function getNavigationBadge(): ?string
     {
@@ -46,13 +46,8 @@ class OperatorResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('nip')
-                    ->label('NIP')
-                    ->required()
-                    ->maxLength(16)
-                    ->unique(ignoreRecord: true),
-                TextInput::make('operator_name')
-                    ->label('Operator Name')
+                TextInput::make('location_name')
+                    ->label('Location Name')
                     ->required()
                     ->maxLength(45),
                 Textarea::make('address')
@@ -138,11 +133,6 @@ class OperatorResource extends Resource
                     })
                     ->required()
                     ->preload(),
-                TextInput::make('no_hp')
-                    ->label('Phone Number')
-                    ->required()
-                    ->tel()
-                    ->maxLength(20),
                 Toggle::make('status')
                     ->label('Status')
                     ->required(),
@@ -153,7 +143,7 @@ class OperatorResource extends Resource
     {
         return $table
             ->query(
-                Operator::query()->with([
+                Location::query()->with([
                     'province' => fn ($query) => $query->select('id', 'province_name'),
                     'city' => fn ($query) => $query->select('id', 'city_name'),
                     'district' => fn ($query) => $query->select('id', 'district_name'),
@@ -164,12 +154,8 @@ class OperatorResource extends Resource
                 ])
             )
             ->columns([
-                TextColumn::make('nip')
-                    ->label('NIP')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('operator_name')
-                    ->label('Operator Name')
+                TextColumn::make('location_name')
+                    ->label('Location Name')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('address')
@@ -194,10 +180,6 @@ class OperatorResource extends Resource
                     ->sortable(),
                 TextColumn::make('postalCode.poscode')
                     ->label('Postal Code')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('no_hp')
-                    ->label('Phone Number')
                     ->searchable()
                     ->sortable(),
                 BooleanColumn::make('status')
@@ -246,21 +228,15 @@ class OperatorResource extends Resource
                     ->relationship('district', 'district_name')
                     ->searchable()
                     ->options(fn () => Cache::remember('district_filter', 60 * 60 * 24, fn () => District::pluck('district_name', 'id')->take(100)->toArray())),
-                SelectFilter::make('subdistrict_id')
-                    ->label('Subdistrict')
-                    ->relationship('subdistrict', 'subdistrict_name')
-                    ->searchable()
-                    ->options(fn () => Cache::remember('subdistrict_filter', 60 * 60 * 24, fn () => Subdistrict::pluck('subdistrict_name', 'id')->take(100)->toArray())),
-                SelectFilter::make('poscode_id')
-                    ->label('Postal Code')
-                    ->relationship('postalCode', 'poscode')
-                    ->searchable()
-                    ->options(fn () => Cache::remember('poscode_filter', 60 * 60 * 24, fn () => PostalCode::pluck('poscode', 'id')->take(100)->toArray())),
-                SelectFilter::make('created_by')
-                    ->label('Created By')
-                    ->relationship('creator', 'name')
-                    ->searchable()
-                    ->options(fn () => Cache::remember('creator_filter', 60 * 60 * 24, fn () => Operator::pluck('name', 'id')->take(100)->toArray())),
+                Tables\Columns\TextColumn::make('created_by')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_by')
+                    ->numeric()
+                    ->sortable(),
+            ])
+            ->filters([
+                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -274,15 +250,17 @@ class OperatorResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            //
+        ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOperators::route('/'),
-            'create' => Pages\CreateOperator::route('/create'),
-            'edit' => Pages\EditOperator::route('/{record}/edit'),
+            'index' => Pages\ListLocations::route('/'),
+            'create' => Pages\CreateLocation::route('/create'),
+            'edit' => Pages\EditLocation::route('/{record}/edit'),
         ];
     }
 }

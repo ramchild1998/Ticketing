@@ -14,7 +14,11 @@ class ListVendors extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-                ->label('Register New Vendor'),
+                ->label('Register New Vendor')
+                ->icon('heroicon-o-plus')
+                ->color('primary')
+                ->size('lg')
+                ->iconPosition('before'),
         ];
     }
 }

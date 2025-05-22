@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Filament\Resources\VendorResource\Pages;
+namespace App\Filament\Resources\CardResource\Pages;
 
-use App\Filament\Resources\VendorResource;
+use App\Filament\Resources\CardResource;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateVendor extends CreateRecord
+class CreateCard extends CreateRecord
 {
-    protected static string $resource = VendorResource::class;
+    protected static string $resource = CardResource::class;
 
-    protected static ?string $title = 'Register New Vendor';
+    protected static ?string $title = 'Register New Machine';
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
@@ -29,7 +29,7 @@ class CreateVendor extends CreateRecord
     {
         return Notification::make()
             ->success()
-            ->title('Vendor registered')
-            ->body('The vendor has been created successfully.');
+            ->title('Card registered')
+            ->body('The card has been created successfully.');
     }
 }

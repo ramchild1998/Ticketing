@@ -1,22 +1,20 @@
 <?php
 
-namespace App\Filament\Resources\UserResource\Pages;
+namespace App\Filament\Resources\MachineResource\Pages;
 
-use App\Filament\Resources\UserResource;
+use App\Filament\Resources\MachineResource;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
-use Swis\Filament\Activitylog\Actions\ActivitylogAction;
 
-class EditUser extends EditRecord
+class EditMachine extends EditRecord
 {
-    protected static string $resource = UserResource::class;
+    protected static string $resource = MachineResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
             // Actions\DeleteAction::make(),
-            ActivitylogAction::make(),
         ];
     }
 
@@ -39,7 +37,7 @@ class EditUser extends EditRecord
     {
         return Notification::make()
             ->success()
-            ->title('User updated')
-            ->body('The user has been updated successfully.');
+            ->title('Machine updated')
+            ->body('The Machine has been updated successfully.');
     }
 }

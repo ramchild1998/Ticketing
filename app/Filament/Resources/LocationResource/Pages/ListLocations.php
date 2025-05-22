@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Filament\Resources\OfficeResource\Pages;
+namespace App\Filament\Resources\LocationResource\Pages;
 
-use App\Filament\Resources\OfficeResource;
+use App\Filament\Resources\LocationResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListOffices extends ListRecords
+class ListLocations extends ListRecords
 {
-    protected static string $resource = OfficeResource::class;
+    protected static string $resource = LocationResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make()
-                ->label('Register New Office')
+                ->label('Register New Location')
                 ->icon('heroicon-o-plus')
                 ->color('primary')
                 ->size('lg')
-                ->iconPosition('before'),
+                ->iconPosition('before')
         ];
     }
 }

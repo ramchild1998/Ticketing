@@ -14,7 +14,11 @@ class ListOperators extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-                ->label('Register New Operator'),
+                ->label('Register New Operator')
+                ->icon('heroicon-o-plus')
+                ->color('primary')
+                ->size('lg')
+                ->iconPosition('before'),
         ];
     }
 }

@@ -14,7 +14,11 @@ class ListRoles extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-                ->label('Register New Role'),
+                ->label('Register New Role')
+                ->icon('heroicon-o-plus')
+                ->color('primary')
+                ->size('lg')
+                ->iconPosition('before'),
         ];
     }
 }

@@ -18,6 +18,16 @@ class EditOperator extends EditRecord
         ];
     }
 
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        return $data;
+    }
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['updated_by'] = auth()->id();
+        return $data;
+    }
+
     protected function getRedirectUrl(): string
     {
         return $this->previousUrl ?? $this->getResource()::getUrl('index');
@@ -27,7 +37,7 @@ class EditOperator extends EditRecord
     {
         return Notification::make()
             ->success()
-            ->title('User updated')
-            ->body('The user has been updated successfully.');
+            ->title('Operator updated')
+            ->body('The operator has been updated successfully.');
     }
 }

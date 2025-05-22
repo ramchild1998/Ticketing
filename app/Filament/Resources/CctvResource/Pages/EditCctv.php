@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Filament\Resources\UserResource\Pages;
+namespace App\Filament\Resources\CctvResource\Pages;
 
-use App\Filament\Resources\UserResource;
+use App\Filament\Resources\CctvResource;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
-use Swis\Filament\Activitylog\Actions\ActivitylogAction;
 
-class EditUser extends EditRecord
+class EditCctv extends EditRecord
 {
-    protected static string $resource = UserResource::class;
+    protected static string $resource = CctvResource::class;
+
+    protected static ?string $title = 'Edit CCTV';
 
     protected function getHeaderActions(): array
     {
         return [
             // Actions\DeleteAction::make(),
-            ActivitylogAction::make(),
         ];
     }
 
@@ -39,7 +39,7 @@ class EditUser extends EditRecord
     {
         return Notification::make()
             ->success()
-            ->title('User updated')
-            ->body('The user has been updated successfully.');
+            ->title('CCTV updated')
+            ->body('The CCTV has been updated successfully.');
     }
 }

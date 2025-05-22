@@ -11,6 +11,15 @@ class CreateOperator extends CreateRecord
 {
     protected static string $resource = OperatorResource::class;
 
+    protected static ?string $title = 'Register New Operator';
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['created_by'] = auth()->id();
+        $data['updated_by'] = auth()->id();
+        return $data;
+    }
+
     protected function getRedirectUrl(): string
     {
         return $this->previousUrl ?? $this->getResource()::getUrl('index');
@@ -20,7 +29,7 @@ class CreateOperator extends CreateRecord
     {
         return Notification::make()
             ->success()
-            ->title('User registered')
-            ->body('The user has been created successfully.');
+            ->title('Operator registered')
+            ->body('The operator has been created successfully.');
     }
 }

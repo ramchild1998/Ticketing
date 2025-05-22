@@ -30,6 +30,13 @@ class VendorResource extends Resource
 
     protected static ?string $pluralLabel = 'Vendors';
 
+    protected static ?string $navigationGroup = 'Master Data';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -55,23 +62,8 @@ class VendorResource extends Resource
                 ->required()
                 ->maxLength(255),
             Toggle::make('status')
-                ->label('Active')
+                ->label('Status')
                 ->default(false),
-            // Select::make('created_by')
-            //     ->label('Created By')
-            //     ->relationship('creator', 'name')
-            //     ->searchable()
-            //     ->preload()
-            //     ->disabled(fn ($livewire) => $livewire instanceof Pages\CreateVendor)
-            //     ->default(auth()->id()),
-            // Select::make('updated_by')
-            //     ->label('Updated By')
-            //     ->relationship('updater', 'name')
-            //     ->searchable()
-            //     ->preload()
-            //     ->disabled()
-            //     ->default(auth()->id())
-            //     ->visible(fn ($livewire) => $livewire instanceof Pages\EditVendor),
             ]);
     }
 

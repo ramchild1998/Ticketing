@@ -31,6 +31,13 @@ class OfficeResource extends Resource
 
     protected static ?string $pluralLabel = 'Offices';
 
+    protected static ?string $navigationGroup = 'Master Data';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form

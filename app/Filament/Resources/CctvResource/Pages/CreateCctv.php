@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Filament\Resources\VendorResource\Pages;
+namespace App\Filament\Resources\CctvResource\Pages;
 
-use App\Filament\Resources\VendorResource;
+use App\Filament\Resources\CctvResource;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateVendor extends CreateRecord
+class CreateCctv extends CreateRecord
 {
-    protected static string $resource = VendorResource::class;
+    protected static string $resource = CctvResource::class;
 
-    protected static ?string $title = 'Register New Vendor';
+    protected static ?string $title = 'Register New CCTV';
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
@@ -29,7 +29,7 @@ class CreateVendor extends CreateRecord
     {
         return Notification::make()
             ->success()
-            ->title('Vendor registered')
-            ->body('The vendor has been created successfully.');
+            ->title('CCTV registered')
+            ->body('The CCTV has been created successfully.');
     }
 }

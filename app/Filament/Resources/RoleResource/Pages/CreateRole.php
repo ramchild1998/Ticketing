@@ -15,6 +15,8 @@ class CreateRole extends CreateRecord
 
     public Collection $permissions;
 
+    protected static ?string $title = 'Register New Role';
+
     protected function getRedirectUrl(): string
     {
         return $this->previousUrl ?? $this->getResource()::getUrl('index');

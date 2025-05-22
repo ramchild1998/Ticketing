@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Filament\Resources\VendorResource\Pages;
+namespace App\Filament\Resources\LocationResource\Pages;
 
-use App\Filament\Resources\VendorResource;
+use App\Filament\Resources\LocationResource;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateVendor extends CreateRecord
+class CreateLocation extends CreateRecord
 {
-    protected static string $resource = VendorResource::class;
+    protected static string $resource = LocationResource::class;
 
-    protected static ?string $title = 'Register New Vendor';
+    protected static ?string $title = 'Register New Location';
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
@@ -29,7 +29,7 @@ class CreateVendor extends CreateRecord
     {
         return Notification::make()
             ->success()
-            ->title('Vendor registered')
-            ->body('The vendor has been created successfully.');
+            ->title('Location registered')
+            ->body('The location has been created successfully.');
     }
 }

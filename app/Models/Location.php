@@ -52,7 +52,7 @@ class Location extends Model
 
     public function postalCode()
     {
-        return $this->belongsTo(PostalCode::class);
+        return $this->belongsTo(PostalCode::class, 'poscode_id');
     }
 
     public function creator()
