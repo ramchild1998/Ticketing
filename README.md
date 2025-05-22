@@ -1,4 +1,4 @@
-# DewaKoding Project Management
+# Abacus Teknika Solusindo Project Management
 
 A Laravel Filament 3 application for managing projects with ticket management and status tracking.
 
