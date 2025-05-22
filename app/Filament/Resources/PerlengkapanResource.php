@@ -13,6 +13,8 @@ use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\Filter;
 
 class PerlengkapanResource extends Resource
 {
@@ -101,7 +103,34 @@ class PerlengkapanResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('nama_alat')
+                    ->label('Equipment Name')
+                    ->options(fn () => Perlengkapan::pluck('nama_alat', 'nama_alat')->toArray())
+                    ->searchable(),
+                Filter::make('jumlah')
+                    ->form([
+                        Forms\Components\TextInput::make('jumlah_min')
+                            ->label('Min Quantity')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('jumlah_max')
+                            ->label('Max Quantity')
+                            ->numeric(),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['jumlah_min'],
+                                fn (Builder $query, $jumlah): Builder => $query->where('jumlah', '>=', $jumlah),
+                            )
+                            ->when(
+                                $data['jumlah_max'],
+                                fn (Builder $query, $jumlah): Builder => $query->where('jumlah', '<=', $jumlah),
+                            );
+                    }),
+                SelectFilter::make('satuan')
+                    ->label('Unit')
+                    ->options(fn () => Perlengkapan::pluck('satuan', 'satuan')->toArray())
+                    ->searchable(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
