@@ -37,7 +37,7 @@ class OperatorResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return Cache::remember('operator_count', 60 * 60, fn () => Operator::count());
+        return static::getModel()::count();
     }
 
     public static function form(Form $form): Form
@@ -144,6 +144,14 @@ class OperatorResource extends Resource
                 Toggle::make('status')
                     ->label('Status')
                     ->required(),
+                TextInput::make('created_by')
+                    ->label('Created By')
+                    ->hidden()
+                    ->default(auth()->user()->id),
+                TextInput::make('updated_by')
+                    ->label('Updated By')
+                    ->hidden()
+                    ->default(auth()->user()->id),
             ]);
     }
 

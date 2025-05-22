@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('operator', function (Blueprint $table) {
             $table->id(); // int UN AI PK
-            $table->string('nip', 16); // varchar(16)
-            $table->string('operator_name', 45); // varchar(45)
-            $table->string('address', 255); // varchar(255)
+            $table->string('nip', 16)->unique(); // varchar(16)
+            $table->string('operator_name', 45)->nullable(); // varchar(45)
+            $table->string('address', 255)->nullable(); // varchar(255)
             $table->unsignedBigInteger('province_id'); // int UN
             $table->unsignedBigInteger('city_id'); // int UN
             $table->unsignedBigInteger('district_id'); // int UN
             $table->unsignedBigInteger('subdistrict_id'); // int UN
             $table->unsignedBigInteger('poscode_id'); // int UN
-            $table->string('no_hp', 20); // varchar(20)
+            $table->string('no_hp', 20)->nullable(); // varchar(20)
             $table->boolean('status'); // tinyint(1)
             $table->timestamps(); // created_at, updated_at
-            $table->unsignedBigInteger('created_by'); // bigint UN
-            $table->unsignedBigInteger('updated_by'); // bigint UN
+            $table->unsignedBigInteger('created_by')->nullable(); // bigint UN
+            $table->unsignedBigInteger('updated_by')->nullable(); // bigint UN
 
             // Foreign key constraints
             $table->foreign('province_id')->references('id')->on('province');
