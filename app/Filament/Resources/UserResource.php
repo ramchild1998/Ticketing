@@ -28,10 +28,7 @@ class UserResource extends Resource
 
     protected static ?string $navigationGroup = 'User Management';
 
-    public static function getNavigationLabel(): string
-    {
-        return 'Users';
-    }
+    protected static ?string $navigationLabel = 'Users';
 
     public static function getNavigationBadge(): ?string
     {

@@ -142,21 +142,6 @@ class OfficeResource extends Resource
             Toggle::make('status')
                 ->label('Status')
                 ->default(false),
-            // Select::make('created_by')
-            //     ->label('Created By')
-            //     ->relationship('creator', 'name')
-            //     ->searchable()
-            //     ->preload()
-            //     ->disabled(fn ($livewire) => $livewire instanceof Pages\CreateOffice)
-            //     ->default(auth()->id()),
-            // Select::make('updated_by')
-            //     ->label('Updated By')
-            //     ->relationship('updater', 'name')
-            //     ->searchable()
-            //     ->preload()
-            //     ->disabled()
-            //     ->default(auth()->id())
-            //     ->visible(fn ($livewire) => $livewire instanceof Pages\EditOffice),
             ]);
     }
 
